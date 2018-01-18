@@ -1,0 +1,41 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+version = '1.0'
+
+jar {
+  baseName 'gradle'
+  manifest {
+    attributes(
+      'Main-Class': 'com.test.Project'
+    )
+  }
+}
+
+dependencies {
+    repositories {
+        mavenCentral()
+    }
+    compile 'log4j:log4j:1.2.17'
+    compile 'commons-collections:commons-collections:3.2.2'
+    testCompile 'junit:junit:4.+'
+}
+
+build {
+    doLast {
+        println 'Build!'
+    }
+}
+
+task test(overwrite:true, dependsOn: build) {
+    doLast {
+        println 'Test!'
+        }
+}
+
+task hello(dependsOn: test) {
+    doLast {
+        println 'Hello!'
+        }
+}
+
